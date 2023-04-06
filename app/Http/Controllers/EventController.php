@@ -6,17 +6,18 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    
-    public function name($nome){
-        if  (strlen($nome) < 3  || (is_numeric($nome)))  {
-        echo 'Insira um nome válido';
-    }   
-    else{
-        echo 'Olá '.$nome .' seja bem-vindo ao meu site';
-    }
+
+    public function name($nome)
+    {
+        if (strlen($nome) < 3  || (is_numeric($nome))) {
+            echo 'Insira um nome válido';
+        } else {
+            echo 'Olá ' . $nome . ' seja bem-vindo ao meu site';
+        }
     }
 
-    public function contas($numero1, $numero2, $operacao = ''){
+    public function contas($numero1, $numero2, $operacao = '')
+    {
         switch ($operacao) {
             case "soma":
                 $resultado = $numero1 + $numero2;
@@ -47,23 +48,19 @@ class EventController extends Controller
         }
     }
 
-    public  function years(int $ano, int $mes=0, int $dia=0){
-        $entrada = new DateTime('now');
-    $saida = new DateTime("$ano-$mes-$dia");
-    $idade = $entrada->diff($saida);
-
-    if ($entrada->format('Y') >= $saida->format('Y')){
-        echo 'Insira uma idade valida';
-    }
-    elseif ($dia==0 && $mes!=0 ){
-        echo 'Você tem ' . $idade->y . ' anos ' . $idade->m . ' meses';
-    }
-    elseif ($mes==0){
-        echo 'Você tem ' . $idade->y . ' anos';
-    }
-    else{
-        echo 'Você tem ' . $idade->y . ' anos ' . $idade->m . ' meses e ' . $idade->d . ' dias';
-    }
-
-    }
+    // public  function years(int $ano, int $mes = 0, int $dia = 0){
+    //     $entrada = new DateTime('now');
+    //     $saida = new DateTime('$ano-$mes-$dia');
+    //     $idade = $entrada->diff($saida);
+    //     dd($entrada);
+    //     if ($entrada->format('Y') >= $saida->format('Y')) {
+    //         echo 'Insira uma idade valida';
+    //     } elseif ($dia == 0 && $mes != 0) {
+    //         echo 'Você tem ' . $idade->y . ' anos ' . $idade->m . ' meses';
+    //     } elseif ($mes == 0) {
+    //         echo 'Você tem ' . $idade->y . ' anos';
+    //     } else {
+    //         echo 'Você tem ' . $idade->y . ' anos ' . $idade->m . ' meses e ' . $idade->d . ' dias';
+    //     }
+    // }
 }

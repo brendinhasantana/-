@@ -10,6 +10,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/hello/{nome}', function ($nome) {
+    if (strlen($nome) < 3  || (is_numeric($nome))) {
+        echo 'Insira um nome válido';
+    } else {
+        echo 'Olá ' . $nome . ' seja bem-vindo ao meu site';
+    }
+})->name('hello');
+
 Route::get('/hi/{nome}', [EventController::class, 'name'])->name('hi');
 
 
@@ -45,30 +53,24 @@ Route::get('/conta/{numero1}/{numero2}/{operacao?}', function ($numero1, $numero
             break;
     };
 })->name('operations');
-//php artisan serve
 
-Route::get('/years/{ano}/{mes?}/{dia?}',[EventController::class, 'years'])->name('years');
 
-Route::get('/idade/{ano}/{mes?}/{dia?}', function (int $ano, int $mes=0, int $dia=0) {
+// Route::get('/years/{ano}/{mes?}/{dia?}', [EventController::class, 'years'])->where(['ano' => '[0-9]{4}', 'mes' => '[0-9]{1,2}', 'dia' => '[0-9]{1,2}'])->name('years');
+
+
+Route::get('/idade/{ano}/{mes?}/{dia?}', function (int $ano, int $mes = 0, int $dia = 0) {
 
     $entrada = new DateTime('now');
     $saida = new DateTime("$ano-$mes-$dia");
     $idade = $entrada->diff($saida);
 
-    if ($entrada->format('Y') >= $saida->format('Y')){
+    if ($saida->format('Y') >= $entrada->format('Y')) {
         echo 'Insira uma idade valida';
-    }
-    elseif ($dia==0 && $mes!=0 ){
+    } elseif ($dia == 0 && $mes != 0) {
         echo 'Você tem ' . $idade->y . ' anos ' . $idade->m . ' meses';
-    }
-    elseif ($mes==0){
+    } elseif ($mes == 0) {
         echo 'Você tem ' . $idade->y . ' anos';
-    }
-    else{
+    } else {
         echo 'Você tem ' . $idade->y . ' anos ' . $idade->m . ' meses e ' . $idade->d . ' dias';
     }
-
-    
-
-})->where(['ano'=>'[0-9]{4}', 'mes'=>'[0-9]{1,2}', 'dia'=>'[0-9]{1,2}']) ; 
-
+})->where(['ano' => '[0-9]{4}', 'mes' => '[0-9]{1,2}', 'dia' => '[0-9]{1,2}'])->name('idade');
