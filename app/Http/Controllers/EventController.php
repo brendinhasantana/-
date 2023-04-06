@@ -44,6 +44,26 @@ class EventController extends Controller
                 $resultado = $numero1 / $numero2;
                 echo '</br>Divisão: ' . $resultado;
                 break;
+        }
     }
-}
+
+    public  function years(int $ano, int $mes=0, int $dia=0){
+        $entrada = new DateTime('now');
+    $saida = new DateTime("$ano-$mes-$dia");
+    $idade = $entrada->diff($saida);
+
+    if ($entrada->format('Y') >= $saida->format('Y')){
+        echo 'Insira uma idade valida';
+    }
+    elseif ($dia==0 && $mes!=0 ){
+        echo 'Você tem ' . $idade->y . ' anos ' . $idade->m . ' meses';
+    }
+    elseif ($mes==0){
+        echo 'Você tem ' . $idade->y . ' anos';
+    }
+    else{
+        echo 'Você tem ' . $idade->y . ' anos ' . $idade->m . ' meses e ' . $idade->d . ' dias';
+    }
+
+    }
 }
