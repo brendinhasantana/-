@@ -68,6 +68,7 @@ Route::get('/idade/{ano}/{mes?}/{dia?}', function (int $ano, int $mes=0, int $di
         echo 'Você tem ' . $idade->y . ' anos ' . $idade->m . ' meses e ' . $idade->d . ' dias';
     }
 
+    
 
 })->where(['ano'=>'[0-9]{4}', 'mes'=>'[0-9]{1,2}', 'dia'=>'[0-9]{1,2}']) ; 
 
